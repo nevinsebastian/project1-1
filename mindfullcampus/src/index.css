@@ -1,7 +1,7 @@
 *{
   margin: 0;
   box-sizing: border-box;
-  font-family: montserrat, sans-serif;
+  font-family:  sans-serif;
   
 }
 
@@ -13,13 +13,13 @@ input, button {
 }
 
 .App {
-  height: 100vh;
+  height:100vh;
   display: flex;
   align-items:center;
-  justify-items:auto;
+  justify-content:center;
   background-color: #53565a;
+  
 }
-
 form {
   display: block;
   position:relative;
