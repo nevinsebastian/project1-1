@@ -1,47 +1,19 @@
-import React, { useState } from 'react'
-import LoginForm from './components/LoginForm'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
+import Home from './components/Home';
+import Physicalhealth from './components/Physicalhelth';
 
 function App() {
-  const adminUser = {
-    email: "admin@gmail.com",
-    password:"admin123"
-  }
-  const [user, setUser] = useState({name: "", email: ""});
-  const [error, setError] = useState("");
-
-  const Login = details => {
-    console.log(details);
-
-    if (details.email == adminUser.email && details.password == adminUser.password){
-      console.log("login")
-      setUser({
-        name: details.name,
-        email:details.email
-      })
-    } else {
-      console.log("details do not match")
-      setError("details do not match")
-    }
-  }
-
-  const Logout = () => {
-    setUser({name: "", email: ""});
-  }
-
   return (
-    <div className="App">
-      {(user.email != "")? (
-        <div className='welcome'>
-          <h1>welcome, <span>{user.name}</span></h1>
-          <button onClick={Logout}>Logout</button>
-        </div>
-      ):
-      (
-        <LoginForm Login={Login} error={error} />
-      )
-      }
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Home />} />
+        <Route path='/physical-health' element={<Physicalhealth />}/>
+      </Routes>
+    </Router>
   );
 }
 
