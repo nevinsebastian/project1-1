@@ -1,8 +1,11 @@
+
+
 .formContainer {
 
  
     background-color: #360c96;
     height: 100vh;
+  
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,7 +35,7 @@
       .title {
         padding-top: 10px;
         
-        color: #5d5b8d;
+        color: #100b97;
         font-size: 21px;
       }
   
