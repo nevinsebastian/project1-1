@@ -1,104 +1,62 @@
-import { useRef, useState, useEffect } from 'react';
-import useAuth from '../hooks/useAuth';
-//import { Link, useNavigate, useLocation } from 'react-router-dom';
-
-import axios from '../api/axios';
-const LOGIN_URL = '/auth';
+import React, { useState } from 'react';
+import axios from 'axios';
+import './login.css'
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
-    
-    const { setAuth } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-    //const navigate = useNavigate();
-    //const location = useLocation();
-    //const from = location.state?.from?.pathname || "/";
-
-    const userRef = useRef();
-    const errRef = useRef();
-
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
-    const [errMsg, setErrMsg] = useState('');
-
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd])
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken });
-            setUser('');
-            setPwd('');
-           // navigate(from, { replace: true });
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Login Failed');
-            }
-            errRef.current.focus();
-        }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const formData = new FormData();
+      formData.append('username', email);
+      formData.append('password', password);
+  
+      const response = await axios.post('http://127.0.0.1:8000/login', formData);
+  
+      // Save the token received from the backend to local storage
+      localStorage.setItem('token', response.data.access_token);
+      
+     
+      // Redirect to the desired page (e.g., Home)
+      // You can use the useHistory hook from 'react-router-dom' for redirection
+      // Example: useHistory().push('/home');
+     navigate('/');
+    } catch (error) {
+      console.error(error);
     }
+  };
+  
 
-    return (
+  return (
+    <div className="formContainer">
+      <div className="formWrapper">
+        <span className="logo">Mindful campus</span>
+        <span className="title">Login</span>
 
-        <section className="login-section">
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    ref={userRef}
-                    autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
-                    required
-                />
-             <div className='password-field'>
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPwd(e.target.value)}
-                    value={pwd}
-                    required
-                />
-             </div>   
-                <button>Sign In</button>
-            </form>
-            <p>
-                Need an Account?<br />
-                <span className="line">
-                  // rout to register
-                </span>
-            </p>
-        </section>
-
-    )
-}
-
-export default Login
+          <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <Link to="/register">Register</Link></p>
+      </div>
+    </div>
+  );
+};
+export default Login;
