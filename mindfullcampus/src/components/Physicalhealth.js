@@ -18,7 +18,7 @@ const Physicalhealth = () => {
         goal: goal,
       };
 
-      const response = await fetch('http://localhost:8000/recommendations', {
+      const response = await fetch('https://projectest.onrender.com/recommendations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

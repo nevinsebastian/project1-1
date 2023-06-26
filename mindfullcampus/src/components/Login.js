@@ -16,7 +16,7 @@ const Login = () => {
       formData.append('username', email);
       formData.append('password', password);
   
-      const response = await axios.post('http://127.0.0.1:8000/login', formData);
+      const response = await axios.post('https://projectest.onrender.com/login', formData);
   
       // Save the token received from the backend to local storage
       localStorage.setItem('token', response.data.access_token);
