@@ -18,7 +18,7 @@ const Register = () => {
           
         };
   
-        const response = await fetch('http://localhost:8000/users', {
+        const response = await fetch('https://projectest.onrender.com/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
