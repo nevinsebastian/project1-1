@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
-import Home from './components/Home';
-import Physicalhealth from './components/Physicalhealth';
+import Login from './components/authpages/Login';
+import Register from './components/authpages/Register';
+import Home from './components/home/Home';
+import Physicalhealth from './components/physical/Physicalhealth';
 import Result from './components/Result';
-import Chat from './components/chat/Chat';
-import MenstrualHealthPage from './components/menstrual';
+
+import MenstrualHealthPage from './components/menstrual/Menstrual';
+
+import Chatbot from './components/chat/Chatbot';
 
 function App() {
   return (
@@ -16,7 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path='/physicalhealth' element={<Physicalhealth />}/>
         <Route path='/physicalhealth/result' element={<Result />}  />
-        <Route path='/mentalhealth' element={<Chat />}/>
+        <Route path='/mentalhealth' element={<Chatbot/>}/>
         <Route path='/menstrualhealthpage' element={<MenstrualHealthPage />} />
 
       </Routes>
