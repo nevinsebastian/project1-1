@@ -39,7 +39,7 @@ function Home() {
         </div>
         </Link>
         
-        <Link className='litxt' to='/menstrualhealth'>
+        <Link className='litxt' to='/MenstrualHealthPage'>
         <div className="card" style={{ width: '18rem', height: '30rem' }}>
           <img src={menstrualImage} className="card-img-top" alt="..." />
           <div className="card-body">
