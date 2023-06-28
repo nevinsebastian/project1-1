@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Physicalhealth from './components/Physicalhealth';
 import Result from './components/Result';
 import Chat from './components/chat/Chat';
+import MenstrualHealthPage from './components/menstrual';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/physicalhealth' element={<Physicalhealth />}/>
         <Route path='/physicalhealth/result' element={<Result />}  />
         <Route path='/mentalhealth' element={<Chat />}/>
+        <Route path='/menstrualhealthpage' element={<MenstrualHealthPage />} />
 
       </Routes>
     </Router>
